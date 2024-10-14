@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] Transform followTarget;
-    [SerializeField] float distance = 8;
+    public float speed = 20;
+    public Vector3 montion;
+    private Rigidbody rb;
 
-    private void Update()
+    void Start()
     {
-
-        transform.position = followTarget.position - new Vector3(0, 0, distance);
+        rb = GetComponent<Rigidbody>();
     }
-    
 
+    void Update()
+    {
+        montion = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        rb.velocity = montion * speed;
+    }
 }
